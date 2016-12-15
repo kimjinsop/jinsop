@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.item.dao.ItemMapper">  
+	<select id="list" parameterType="map" resultType="itemCommand">
+		SELECT * FROM (SELECT a.*, 	rownum rnum FROM 
+		(select it_model, it_brand, it_code, count(it_model) model_cnt from (select * from items
+	   	  <where>
+   	  		<if test="it_model!=''">
+	   	  		it_model like '%' || #{it_model} || '%'
+   	  		</if>
+   	  		<if test="it_brand!=''">
+   	  			it_brand like '%' || #{it_brand} || '%'
+   	  		</if>
+   	  		and it_status='Y'
+	   	  </where>
+		  )group by it_model, it_brand, it_code)a)
+		<![CDATA[			  
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>					
+	</select>
+	
+	<select id="getRowCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM items
+		<where>
+   	  		<if test="it_model!=''">
+	   	  		it_model like '%' || #{it_model} || '%'
+   	  		</if>
+   	  		<if test="it_brand!=''">
+   	  			it_brand like '%' || #{it_brand} || '%'
+   	  		</if>
+   	  		and  it_status='Y'
+	   	  </where>
+	</select>
+
+	<select id="listByModel" parameterType="map" resultType="itemCommand">
+		SELECT * 	FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM items  	  	
+   	  		 where it_status='Y' AND it_code = #{it_code} ORDER BY it_num DESC)a)
+		<![CDATA[			  
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>					
+	</select>
+	<select id="getModelCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM items WHERE it_status='Y' AND it_code = #{it_code}
+	</select>
+
+	<!-- 판매 목록(관리자) -->
+	<select id="sellList" parameterType="map" resultType="itemCommand">
+		select * from (select a.*, rownum rnum from (select * from items
+		where it_status='N' order by it_register desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="getSellCount" parameterType="map" resultType="integer">
+		select count(*) from items where it_status='N'
+	</select>
+	
+	<select id="sellingList" parameterType="map" resultType="itemCommand">
+		select * from (select a.*, rownum rnum from (select * from items
+		where it_status='Y' order by it_register desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="getSellingCount" parameterType="map" resultType="integer">
+		select count(*) from items where it_status='Y'
+	</select>
+	
+	<select id="soldList" parameterType="map" resultType="itemCommand">
+		select * from (select a.*, rownum rnum from (select * from items
+		where it_status='C' order by it_register desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="getSoldCount" parameterType="map" resultType="integer">
+		select count(*) from items where it_status='C'
+	</select>
+	
+	<!-- 판매 목록(사용자) -->
+	<select id="userSellList" parameterType="map" resultType="itemCommand">
+		select * from (select a.*, rownum rnum from (select * from items
+		where it_status='N' and mem_id=#{mem_id} order by it_register desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="getUserSellCount" parameterType="map" resultType="integer">
+		select count(*) from items where it_status='N' and mem_id=#{mem_id}
+	</select>
+	
+	<select id="userSellingList" parameterType="map" resultType="itemCommand">
+		select * from (select a.*, rownum rnum from (select * from items
+		where it_status='Y' and mem_id=#{mem_id} order by it_register desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="getUserSellingCount" parameterType="map" resultType="integer">
+		select count(*) from items where it_status='Y' and mem_id=#{mem_id}
+	</select>
+	
+	<select id="userSoldList" parameterType="map" resultType="itemCommand">
+		select * from (select a.*, rownum rnum from (select * from items
+		where it_status='C' and mem_id=#{mem_id} order by it_register desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="getUserSoldCount" parameterType="map" resultType="integer">
+		select count(*) from items where it_status='C' and mem_id=#{mem_id}
+	</select>
+	
+	<!-- 우수판매회원 주말 추가 -->
+	<select id="vipSellList" parameterType="map" resultType="itemCommand">
+		select * from (select a.*, rownum rnum from (select mem_id,count(*) model_cnt,sum(it_price) total_price from 
+		(select * from items where it_status='C') group by mem_id order by sum(it_price) desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+	<select id="getVipSellCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM (SELECT * FROM (SELECT MEM_ID FROM ITEMS WHERE IT_STATUS='C') GROUP BY MEM_ID)
+	</select>
+	 
+	<!-- 브랜드별 메인 판매 -->
+	<select id="getBrandCount" parameterType="map" resultType="integer">
+		select count(*) from (select * from items where it_status='C') group by it_brand
+	</select>
+	
+	<!-- 관리자 판매 승인 -->
+	<update id="sellAgree" parameterType="list">
+		UPDATE items SET it_status='Y' where it_num in
+		<foreach collection="list" item="num" open="(" separator="," close=")">
+			#{num}
+		</foreach>	
+	</update>	
+</mapper>
+

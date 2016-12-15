@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="register" extends="main">
+		<put-attribute name="title" value="회원가입" />
+		<put-attribute name="body" value="/WEB-INF/views/member/register.jsp" />
+	</definition>
+	<definition name="Login" extends="register">
+		<put-attribute name="title" value="로그인"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/login.jsp"/>
+	</definition>
+	<definition name="memberView" extends="register">
+		<put-attribute name="title" value="회원정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberView.jsp"/>
+	</definition>
+	<definition name="memberModify" extends="register">
+		<put-attribute name="title" value="회원정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberModify.jsp"/>
+	</definition>
+	<definition name="memberDelete" extends="register">
+		<put-attribute name="title" value="회원탈퇴"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberDelete.jsp"/>
+	</definition>
+	<definition name="receipts" extends="register">
+		<put-attribute name="title" value="판매/구매 정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/receipts.jsp"/>
+	</definition>
+	<definition name="point" extends="register">
+		<put-attribute name="title" value="구매정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/point.jsp"/>
+	</definition>
+</tiles-definitions> 

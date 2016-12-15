@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.notice.dao.NoticeMapper">
+	<select id="list" parameterType="map" resultType="noticeCommand">
+		select * from (select a.*, rownum rnum from (select * from noticeboard order by nb_num desc)a)
+		<![CDATA[
+		where rnum>=#{start} and rnum<=#{end}
+		]]>
+	</select>
+</mapper>

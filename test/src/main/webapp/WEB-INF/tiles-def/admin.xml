@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="adminMain" template="/WEB-INF/views/template_admin/layout.jsp">
+    	<put-attribute name="title" value="관리자"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template_admin/header.jsp"/>
+    	<put-attribute name="menu" value="/WEB-INF/views/template_admin/menu.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/admin/mainmng.jsp"/>
+    </definition>
+    
+    <definition name="membermng" extends="adminMain">
+		<put-attribute name="title" value="회원관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/membermng.jsp"/>
+	</definition>
+	
+	<definition name="boardmng" extends="adminMain">
+		<put-attribute name="title" value="게시판관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/boardmng.jsp"/>
+	</definition>
+	
+	<definition name="faqUpdate" extends="adminMain">
+		<put-attribute name="title" value="faq수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/faq/update.jsp"/>
+	</definition>
+	
+	<definition name="faqWrite" extends="adminMain">
+		<put-attribute name="title" value="faq등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/faq/write.jsp"/>
+	</definition>
+	
+		<definition name="noticeWrite" extends="adminMain">
+		<put-attribute name="title" value="공지사항등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/write.jsp"/>
+	</definition>
+	
+	<definition name="noticeUpdate" extends="adminMain">
+		<put-attribute name="title" value="공지사항수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/update.jsp"/>
+	</definition>
+	
+	<definition name="commmng" extends="adminMain">
+		<put-attribute name="title" value="커뮤니티관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/commmng.jsp"/>
+	</definition>
+	
+	<definition name="commViewMng" extends="adminMain">
+		<put-attribute name="title" value="커뮤니티 상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/commViewMng.jsp"/>
+	</definition>
+	
+	<definition name="selltotalmng" extends="adminMain">
+		<put-attribute name="title" value="판매신청목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/selltotalmng.jsp"/>
+	</definition> 
+	
+	<definition name="buymng" extends="adminMain">
+		<put-attribute name="title" value="구매완료목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/buymng.jsp"/>
+	</definition>
+	
+	<!-- 9/24 추가-->
+	<definition name="vipmng" extends="adminMain">
+		<put-attribute name="title" value="우수회원목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/vipmng.jsp"/>
+	</definition>
+	
+	<definition name="pageError" template="main">
+    	<put-attribute name="title" value="에러페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/error/pageError.jsp"/>
+    </definition>
+</tiles-definitions>
+
+
+
+
+
+
+
+

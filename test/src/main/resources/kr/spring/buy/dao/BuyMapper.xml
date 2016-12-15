@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.buy.dao.BuyMapper">
+	<select id="list" parameterType="map" resultType="buyCommand">
+		select * from (select a.*, rownum rnum from 
+		(select i.it_model, i.it_image, i.it_brand, i.it_price, i.it_size, b.mem_id, b.buy_register from items i, buy b 
+		where i.it_num=b.it_num and b.mem_id=#{mem_id} order by b.buy_register desc)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+
+	<select id="getRowCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM buy b, items i where b.it_num = i.it_num and b.mem_id=#{mem_id}
+	</select>
+	
+	<!-- 관리자 구매 목록 -->
+	<select id="buyList" parameterType="map" resultType="buyCommand">
+		select * from (select a.*, rownum rnum from 
+		(select i.it_model, i.it_image, i.it_brand, i.it_price, i.it_size, b.mem_id, b.buy_register from items i, buy b 
+		where i.it_num=b.it_num order by b.buy_register desc)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+
+	<select id="getbuyCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM buy b, items i where b.it_num = i.it_num
+	</select>
+	
+	<!-- 우수 구매 회원 목록 -->
+	<select id="vipBuyList" parameterType="map" resultType="buyCommand">
+		select * from (select a.*, rownum rnum from
+		(select mem_id, sum(price) total_price, count(*) model_cnt from
+		(select b.*,i.it_price price from buy b, items i where b.it_num=i.it_num) group by mem_id order by total_price desc) a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+
+	<select id="getVipBuyCount" parameterType="map" resultType="integer">
+		select count(*) from (select mem_id, sum(price) total_price, count(*) model_cnt from
+		(select b.*,i.it_price price from buy b, items i where b.it_num=i.it_num) group by mem_id)
+	</select>
+</mapper>

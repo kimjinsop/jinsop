@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="itemWrite" extends="main">
+		<put-attribute name="title" value="상품등록" />
+		<put-attribute name="body" value="/WEB-INF/views/item/itemWrite.jsp" />
+	</definition>
+
+	<definition name="listByModel" extends="itemWrite">
+		<put-attribute name="title" value="상품목록" />
+		<put-attribute name="body" value="/WEB-INF/views/item/listByModel.jsp" />
+	</definition>
+
+	<definition name="itemDetail" extends="itemWrite">
+		<put-attribute name="title" value="상품상세" />
+		<put-attribute name="body" value="/WEB-INF/views/item/itemDetail.jsp" />
+	</definition>
+
+	<definition name="itemModify" extends="itemWrite">
+		<put-attribute name="title" value="상품등록" />
+		<put-attribute name="body" value="/WEB-INF/views/item/itemModify.jsp" />
+	</definition>
+
+	<definition name="itemList" extends="itemWrite">
+		<put-attribute name="title" value="제품모델리스트" />
+		<put-attribute name="body" value="/WEB-INF/views/item/itemList.jsp" />
+	</definition>
+
+	<definition name="itemBuy" extends="itemWrite">
+		<put-attribute name="title" value="상품등록" />
+		<put-attribute name="body" value="/WEB-INF/views/item/itemBuy.jsp" />
+	</definition>
+		
+	<definition name="search" extends="itemWrite">
+		<put-attribute name="title" value="상품검색" />
+		<put-attribute name="body" value="/WEB-INF/views/item/searchModel.jsp" />
+	</definition>
+	
+</tiles-definitions>
+
+
+
+
+
+
+
+
+

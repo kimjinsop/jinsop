@@ -1,0 +1,13 @@
+ul.search {
+	width: 700px;
+	list-style: none;
+	padding: 0;
+	margin: 10px auto;
+}
+ul.search li {
+	display: inline;
+}
+ul.search li input[type="text"] {
+	width: 500px;
+	height:35px;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.main.dao.MainMapper">  
+	<select id="newList" parameterType="map" resultType="itemCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM items  	  	
+   	  		 where it_status='Y' ORDER BY  it_register DESC)a)
+	</select>
+	
+	<select id="getnewCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM items where it_status='Y'
+	</select>
+
+	<select id="deadList" parameterType="map" resultType="itemCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM items  	  	
+   	  		 where it_status='Y' ORDER BY  it_register ASC)a)
+	</select>
+	
+	<select id="getdeadCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM items where it_status='Y'
+	</select>
+
+	<select id="lowList" parameterType="map" resultType="itemCommand">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM items  	  	
+   	  		 where it_status='Y' ORDER BY  it_price ASC)a)
+	</select>
+	
+	<select id="getlowCount" parameterType="map" resultType="integer">
+		SELECT count(*) FROM items where it_status='Y'
+	</select>
+	
+
+
+</mapper>
+
