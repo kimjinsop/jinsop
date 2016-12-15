@@ -10,8 +10,10 @@
 		<ul class="sequence-canvas" >
 			<!-- Slide 1 -->
 			<li class="bg4">
+			
+			
 				<!-- Slide Title -->
-				<h2 class="title">Security</h2> <!-- Slide Text -->
+				<h2 class="title">Security123</h2> <!-- Slide Text -->
 				<h3 class="subtitle">Security is the degree of resistance to, or protection from, harm. It applies to any vulnerable and valuable asset, such as a person, dwelling, community, item, nation, or organization. As noted by the Institute for Security and Open Methodologies (ISECOM) in the OSSTMM 3, security provides "a form of protection where a separation is created between the assets and the threat." These separations are generically called "controls," and sometimes include changes to the asset or the threat.</h3><!-- Slide Image --> <img class="slide-img"
 				src="${pageContext.request.contextPath}/model/slide5.png" width="200px" height="200px"
 				alt="Slide 1" />
